@@ -1,10 +1,7 @@
 import axios from 'axios'
 
 const URL = 'http://localhost:3001'
-export const setList = (value) => ({
- type: 'CHANGE_SCORE',
- value 
-})
+export const setList = (value) => ({type: 'CHANGE_SCORE', value})
 
 const config = {
   headers: {'Authorization': 'whatever-you-want'}
@@ -20,6 +17,7 @@ export const search = () => {
 export const changeScorePost = (id, isUpVote) => {
   return dispatch => {
     return axios.post(`${URL}/posts/${id}`, { 'option' : isUpVote ? 'upVote' : 'downVote' }, config)
-      .then(resp => dispatch(setList(resp.data)))
+      .then(resp => dispatch(search()))
   }
 }
+  

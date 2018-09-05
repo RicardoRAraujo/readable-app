@@ -10,6 +10,7 @@ module.exports = {
     port: 8080,
     contentBase: './public',
   },
+  devtool: 'source-map',
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {

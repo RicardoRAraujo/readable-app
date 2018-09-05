@@ -15,7 +15,7 @@ class PostsList extends Component {
   }
 
   renderRows() {
-    let list = this.props.list || []
+    let list = this.props.list
     return list.map(posts => (
       <div key={posts.id}>
         <Grid cols="12" >
@@ -27,10 +27,10 @@ class PostsList extends Component {
           <Grid cols="3"> 
             <h3> <i className="fa fa-star-half-o"> Score</i></h3>
             <div>
-              <button onClick={ changeScorePost(posts.id, false)}>
+              <button onClick={ () => this.props.changeScorePost(posts.id, false)}>
                 <i className="fa fa-minus fa-2x"> {posts.voteScore}</i>
               </button>
-              <button onClick={ changeScorePost(posts.id, true)}>
+              <button onClick={ () => this.props.changeScorePost(posts.id, true)}>
                 <i className="fa fa-plus fa-2x"></i>
               </button>
             </div>
