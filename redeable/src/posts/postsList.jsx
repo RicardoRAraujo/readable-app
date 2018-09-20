@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { search, changeScorePost  } from './postsActions'
+import { search, changeScorePost, deletePost  } from './postsActions'
 import Grid from '../template/grid'
 
 
@@ -19,19 +20,24 @@ class PostsList extends Component {
     return list.map(posts => (
       <div key={posts.id}>
         <Grid cols="12" >
-          <Grid cols="9"> 
-            <h3> <i className="fa fa-file-text-o"> {posts.title}</i></h3>
-            <p>Autor: {posts.author}</p>
-            <div>Nº de comentarios: {posts.commentCount}</div>
+          <Grid cols="10"> 
+            <h3> <i className="fa fa-file-text-o"> {posts.title}</i>
+              <Link to="/about"> <i className="fa fa-arrow-right"></i></Link>
+            </h3>
+            <p>Author: {posts.author}</p>
+            <div>Nº of comments: {posts.commentCount}</div>
           </Grid>
-          <Grid cols="3"> 
-            <h3> <i className="fa fa-star-half-o"> Score</i></h3>
+          <Grid cols="2"> 
+            <h3> <i className="fa fa-star-half-o"> Score : {posts.voteScore}</i></h3>
             <div>
-              <button onClick={ () => this.props.changeScorePost(posts.id, false)}>
-                <i className="fa fa-minus fa-2x"> {posts.voteScore}</i>
+              <button className="btn btn-warning" onClick={ () => this.props.changeScorePost(posts.id, false)}>
+                <i className="fa fa-minus"></i>
               </button>
-              <button onClick={ () => this.props.changeScorePost(posts.id, true)}>
-                <i className="fa fa-plus fa-2x"></i>
+              <button className="btn btn-success" onClick={ () => this.props.changeScorePost(posts.id, true)}>
+                <i className="fa fa-plus"></i>
+              </button>
+              <button className="btn btn-danger" onClick={ () => this.props.deletePost(posts.id)}>
+                <i className="fa fa-trash-o"></i>
               </button>
             </div>
           </Grid>
@@ -53,6 +59,7 @@ class PostsList extends Component {
 const mapStateToProps = state => ({ list: state.posts.list})
 const mapDispatchToProps = (dispatch) => ({ 
   search: bindActionCreators(search, dispatch),
-  changeScorePost: bindActionCreators(changeScorePost, dispatch) 
+  changeScorePost: bindActionCreators(changeScorePost, dispatch),
+  deletePost: bindActionCreators(deletePost, dispatch)
 })
 export default connect(mapStateToProps, mapDispatchToProps)(PostsList)

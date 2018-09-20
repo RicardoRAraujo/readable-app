@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux'
-import postsReducer from '../posts/postsReducer'
-import todoReducer from '../todo/todoReducer'
+import postsReducer from './posts/postsReducer'
 
 const rootReducer = combineReducers({
-  todo: todoReducer,
   posts: postsReducer
 })
 

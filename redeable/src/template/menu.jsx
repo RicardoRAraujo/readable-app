@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 export default props => (
   <nav className="navbar navbar-inverse bg-inverse">
@@ -10,9 +11,8 @@ export default props => (
       </div>
       <div id="navbar" className="navbar-collapse collapse">
         <ul className="nav navbar-nav">
-          <li><a href="#/todo">Todo</a></li>
-          <li><a href="#/posts">Posts</a></li>
-          <li><a href="#/about">About</a></li>
+          <li><Link to="posts">Posts</Link></li>
+          <li><Link to="about">About</Link></li>
         </ul>
       </div>
     </div>

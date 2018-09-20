@@ -6,7 +6,7 @@ export default class Posts extends Component {
   render() {
     return(
       <div>
-        <PageHeader name="Todos os Posts" small="Lista" />
+        <PageHeader name="All Posts" small="List" />
         <PostsList />
       </div>
     )

@@ -1,10 +1,13 @@
 import axios from 'axios'
 
 const URL = 'http://localhost:3001'
-export const setList = (value) => ({type: 'CHANGE_SCORE', value})
 
 const config = {
-  headers: {'Authorization': 'whatever-you-want'}
+  headers: {
+    'Authorization': 'whatever-you-want',
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  }
 }
 
 export const search = () => {
@@ -20,4 +23,21 @@ export const changeScorePost = (id, isUpVote) => {
       .then(resp => dispatch(search()))
   }
 }
+
+export const deletePost = (id) => {
+  return dispatch => {
+    return axios.delete(`${URL}/posts/${id}`, config)
+      .then(resp => dispatch(search()))
+  }
+} 
+
+export const createPost = (body) => {
+  return dispatch => {
+    return axios.post(`${URL}/posts`, JSON.stringify(body) , config)
+      .then(resp => dispatch(search()))
+  }
+}
+
+
+
   
