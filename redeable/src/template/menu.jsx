@@ -5,9 +5,9 @@ export default props => (
   <nav className="navbar navbar-inverse bg-inverse">
     <div className="container">
       <div className="navbar-header">
-        <a className="navbar-brand" href="#">
+        <Link className="navbar-brand" to="/posts">
           <i className="fa fa-book" aria-hidden="true"> Redeable</i>
-        </a>
+        </Link>
       </div>
       <div id="navbar" className="navbar-collapse collapse">
         <ul className="nav navbar-nav">
