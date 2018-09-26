@@ -1,3 +1,4 @@
 api-server/node_modules
-redeable/node_modules
+readable/node_modules
+readable/package-lock.json
 *.log
