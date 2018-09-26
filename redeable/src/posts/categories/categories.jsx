@@ -31,6 +31,7 @@ class Categories extends Component {
         { this.renderRows() }
         <div className="col-md-3 col-md-offset-6">
           <select className="form-control" onChange={(event) => this.props.sortBy(event.target.value)}>
+            <option value="">Order by ?</option>
             <option value="Score">Order by Score</option>
             <option value="Date">Order by Date</option>
           </select>

@@ -14,12 +14,29 @@ class CategoriesListPost extends Component {
     this.props.searchPostsCategories(this.props.params.category)
   }
 
+
   componentDidUpdate() {
     this.props.searchPostsCategories(this.props.params.category)
   }
 
   renderRows() {
     let list = this.props.list
+    let order = this.props.order
+    list.sort(function(a, b) {
+      if (order === "Date") {
+        return (a.timestamp > b.timestamp)
+          ? -1
+          : 1
+      } else if (order === ""){
+        return (a.id > b.id)
+          ? -1
+          : 1
+      } else {
+        return (a.voteScore > b.voteScore)
+        ? -1
+        : 1
+      }
+    })
     //console.log(list)
     return list.map(posts => (
       <div key={posts.id}>
@@ -61,7 +78,7 @@ class CategoriesListPost extends Component {
   } 
 }
 
-const mapStateToProps = state => ({ list: state.categories.list})
+const mapStateToProps = state => ({ list: state.categories.list, order: state.categories.order})
 const mapDispatchToProps = (dispatch) => ({ 
   searchPostsCategories: bindActionCreators(searchPostsCategories, dispatch),
   changeScorePost: bindActionCreators(changeScorePost, dispatch),

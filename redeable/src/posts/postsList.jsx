@@ -18,14 +18,18 @@ class PostsList extends Component {
     let list = this.props.list
     let order = this.props.order
     list.sort(function(a, b) {
-      if (order === 'Date') {
+      if (order === "Date") {
         return (a.timestamp > b.timestamp)
+          ? -1
+          : 1
+      } else if (order === ""){
+        return (a.id > b.id)
           ? -1
           : 1
       } else {
         return (a.voteScore > b.voteScore)
-          ? -1
-          : 1
+        ? -1
+        : 1
       }
     })
 
