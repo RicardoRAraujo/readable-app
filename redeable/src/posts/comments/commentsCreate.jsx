@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { createPost  } from './postsActions'
+import { createComments  } from './commentsActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import serializeForm from 'form-serialize'
 
-class PostCreate extends Component {
+class CommentsCreate extends Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -27,8 +27,9 @@ class PostCreate extends Component {
     const values = serializeForm(e.target, { hash:true })
     values['id'] = this.randomString(20)
     values['timestamp'] = new Date().valueOf()
-    if(this.props.createPost) {
-      this.props.createPost(values)
+    values['parentId'] = this.props.id
+    if(this.props.createComments) {
+      this.props.createComments(values, this.props.id)
       document.getElementById("form").reset();
     }
   }
@@ -38,7 +39,7 @@ class PostCreate extends Component {
     return(
       <div>
         <div className="col-md-11">
-          <h3>New post</h3> 
+          <h3>New comment</h3> 
         </div>
         <div className="col-md-1">
           <i onClick={() => this.props.closeModal()} className="fa fa-times-circle fa-2x element-icon-close-style"></i>
@@ -46,12 +47,8 @@ class PostCreate extends Component {
         <form onSubmit={this.handleSubmit} id="form" className="form-inline">
           <div className="form-group">
             <input className="form-control" type="text" name="author" placeholder="Author"/>
-            <input className="form-control" type="text" name="title" placeholder="Title"/>
-            <input className="form-control" type="text" name="body" placeholder="Description"/>
-            <select className="form-control" name="category">
-              {categories.map((category) => (<option key={category.path} value={category.name}>{category.name}</option>))}
-            </select>
-            <button className="btn btn-success">Add post</button>
+            <input className="form-control" type="textarea" name="body" placeholder="Description"/>
+            <button className="btn btn-success">Add comment</button>
           </div>
         </form>
       </div>
@@ -61,6 +58,6 @@ class PostCreate extends Component {
 
 const mapStateToProps = state => ({ categories: state.categories.categories})
 const mapDispatchToProps = (dispatch) => ({ 
-  createPost: bindActionCreators(createPost, dispatch),
+  createComments: bindActionCreators(createComments, dispatch)
 })
-export default connect(mapStateToProps, mapDispatchToProps)(PostCreate)
+export default connect(mapStateToProps, mapDispatchToProps)(CommentsCreate)

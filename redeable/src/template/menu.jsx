@@ -11,8 +11,8 @@ export default props => (
       </div>
       <div id="navbar" className="navbar-collapse collapse">
         <ul className="nav navbar-nav">
-          <li><Link to="posts">Posts</Link></li>
-          <li><Link to="about">About</Link></li>
+          <li><Link to="/posts">Posts</Link></li>
+          <li><Link to="/about">About</Link></li>
         </ul>
       </div>
     </div>

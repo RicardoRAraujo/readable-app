@@ -1,22 +1,26 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
+import PageHeader from '../../template/pageHeader'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { search, changeScorePost, deletePost  } from './postsActions'
-import Grid from '../template/grid'
+import { changeScorePost, deletePost  } from '../postsActions'
+import { searchPostsCategories } from './categoriesActions'
+import { Link } from 'react-router'
+import Grid from '../../template/grid'
 
 
-class PostsList extends Component {
-  constructor(props) {
-    super(props)
+class CategoriesListPost extends Component {
+
+  componentWillMount() {
+    this.props.searchPostsCategories(this.props.params.category)
   }
 
-  componentDidMount() {
-    this.props.search()
+  componentDidUpdate() {
+    this.props.searchPostsCategories(this.props.params.category)
   }
 
   renderRows() {
     let list = this.props.list
+    //console.log(list)
     return list.map(posts => (
       <div key={posts.id}>
         <Grid cols="12" >
@@ -45,21 +49,23 @@ class PostsList extends Component {
       </div>
     ))
   }
-  
+
   render() {
+    //console.log(this.props.list)
     return(
       <div>
+        <PageHeader name={`${this.props.params.category} Posts`} small="List" />
         {this.renderRows()}
       </div>
     )
   } 
 }
 
-//"posts.list" está vindo da chave do reducer 
-const mapStateToProps = state => ({ list: state.posts.list})
+const mapStateToProps = state => ({ list: state.categories.list})
 const mapDispatchToProps = (dispatch) => ({ 
-  search: bindActionCreators(search, dispatch),
+  searchPostsCategories: bindActionCreators(searchPostsCategories, dispatch),
   changeScorePost: bindActionCreators(changeScorePost, dispatch),
   deletePost: bindActionCreators(deletePost, dispatch)
 })
-export default connect(mapStateToProps, mapDispatchToProps)(PostsList)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesListPost)
+

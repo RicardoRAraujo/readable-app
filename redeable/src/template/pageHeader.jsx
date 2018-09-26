@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Modal from 'react-modal'
 import PostCreate from '../posts/postsCreate'
+import Categories from '../posts/categories/categories'
 
 const customStyles = {
   content : {
@@ -20,8 +21,6 @@ class Header extends Component {
     this.state = {
       modalIsOpen: false
     };
-    //console.log(this.props)
-
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     //Modal.setAppElement('#root');
@@ -42,19 +41,21 @@ class Header extends Component {
             <div>
               <h2>{this.props.name} 
                 <small> / {this.props.small}</small>
-                {this.props.small === 'List' && (
+                {this.props.small !== '?' && (
                   <small><button onClick={this.openModal} className="botao-header-add btn btn-primary"><i className="fa fa-plus"></i> Add</button></small>
                 )}
               </h2>
             </div>
           </header>
+          {this.props.name !== 'About' && this.props.name !== 'Post' && (
+            <Categories />
+          )}
         <Modal
           isOpen={this.state.modalIsOpen}
           style={customStyles}
           contentLabel="Example Modal"
           ariaHideApp={false}
         >
-        <h3>New Post</h3> 
         <PostCreate closeModal={this.closeModal}/>
         </Modal>
       </div>
