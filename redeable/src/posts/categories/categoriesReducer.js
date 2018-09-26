@@ -1,9 +1,11 @@
 const SEARCHED_CATEGORY = 'SEARCHED_CATEGORY'
 const SEARCHED_CATEGORY_POSTS = 'SEARCHED_CATEGORY_POSTS'
+const ORDER_BY = 'ORDER_BY'
 
 const INITIAL_STATE = {
   categories: [],
-  list: []
+  list: [],
+  order: ""
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -11,7 +13,9 @@ export default (state = INITIAL_STATE, action) => {
     case SEARCHED_CATEGORY:
       return { ...state, categories: action.payload.categories }
     case SEARCHED_CATEGORY_POSTS:
-      return { ...state, list: action.payload }  
+      return { ...state, list: action.payload } 
+    case ORDER_BY:
+      return { ...state, order: action.order }   
     default:
       return state
   }

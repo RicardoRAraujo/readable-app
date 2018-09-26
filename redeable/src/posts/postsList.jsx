@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 import { search, changeScorePost, deletePost  } from './postsActions'
 import Grid from '../template/grid'
 
-
 class PostsList extends Component {
   constructor(props) {
     super(props)
@@ -17,6 +16,19 @@ class PostsList extends Component {
 
   renderRows() {
     let list = this.props.list
+    let order = this.props.order
+    list.sort(function(a, b) {
+      if (order === 'Date') {
+        return (a.timestamp > b.timestamp)
+          ? -1
+          : 1
+      } else {
+        return (a.voteScore > b.voteScore)
+          ? -1
+          : 1
+      }
+    })
+
     return list.map(posts => (
       <div key={posts.id}>
         <Grid cols="12" >
@@ -56,7 +68,7 @@ class PostsList extends Component {
 }
 
 //"posts.list" está vindo da chave do reducer 
-const mapStateToProps = state => ({ list: state.posts.list})
+const mapStateToProps = state => ({ list: state.posts.list, order: state.categories.order})
 const mapDispatchToProps = (dispatch) => ({ 
   search: bindActionCreators(search, dispatch),
   changeScorePost: bindActionCreators(changeScorePost, dispatch),

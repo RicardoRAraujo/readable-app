@@ -23,3 +23,10 @@ export const searchPostsCategories = (category) => {
       .then(resp => dispatch({type: 'SEARCHED_CATEGORY_POSTS', payload: resp.data}))
   }
 }
+
+export const sortBy = (event) => {
+  return(dispatch) => {
+    let order = dispatch({type: 'ORDER_BY', order:event})
+      return order
+  }
+}
