@@ -7,13 +7,11 @@ import { searchPostsCategories } from './categoriesActions'
 import { Link } from 'react-router'
 import Grid from '../../template/grid'
 
-
 class CategoriesListPost extends Component {
 
   componentWillMount() {
     this.props.searchPostsCategories(this.props.params.category)
   }
-
 
   componentDidUpdate() {
     this.props.searchPostsCategories(this.props.params.category)
@@ -37,7 +35,7 @@ class CategoriesListPost extends Component {
         : 1
       }
     })
-    //console.log(list)
+
     return list.map(posts => (
       <div key={posts.id}>
         <Grid cols="12" >
@@ -68,7 +66,6 @@ class CategoriesListPost extends Component {
   }
 
   render() {
-    //console.log(this.props.list)
     return(
       <div>
         <PageHeader name={`${this.props.params.category} Posts`} small="List" />

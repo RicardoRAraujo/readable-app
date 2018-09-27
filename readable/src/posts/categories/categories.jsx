@@ -15,7 +15,6 @@ class Categories extends Component {
 
   renderRows() {
     let categories = this.props.category
-    //console.log(list)
     return categories.map(category => (
       <div className="col-md-1" key={category.path} >
         <Link to={`/${category.name}`}>

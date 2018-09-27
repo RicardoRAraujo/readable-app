@@ -16,17 +16,14 @@
   float: right;
   margin-right: 20px;
 }
-
 .element-jumbotron-style {
   padding-top: 1.5%;
   padding-left: 0% !important;
   padding-right: 0% !important;
 }
-
 .element-icon-close-style {
   padding-top: 10px;
 }
-
 .comment {
   position: relative;
   background: #fff;
@@ -39,7 +36,6 @@
 .icon-comments {
   padding-right: 1%;
 }
-
 .fa-times:hover {
   color: blue !important;
 }
@@ -55,11 +51,9 @@
 .fa-times-circle:hover {
   color: red !important;
 }
-
 .panel-relative{
   position: relative;
 } 
-
 .btn-right{
   position: absolute;
   right: 20px;

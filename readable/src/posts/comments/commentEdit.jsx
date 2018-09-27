@@ -33,7 +33,6 @@ class CommentEdit extends Component {
   }
 
   render() {
-    console.log(this.props)
     return(
       <div>
         <div className="col-md-11">

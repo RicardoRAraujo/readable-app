@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux'
 import Grid from '../template/grid'
 import Comments from '../posts/comments/comments'
 
-
 class PostDetail extends Component {
   constructor(props) {
     super(props)
@@ -22,7 +21,6 @@ class PostDetail extends Component {
     const d = new Date(timestamp)
     return d.toUTCString().split(" ").slice(0,4).join(" ")
   }
-  
   
   render() {
     let post = this.props.post
