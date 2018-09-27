@@ -39,6 +39,14 @@ export const createComments = (body, idPost) => {
   }
 }
 
+export const editComment = (body, id, idPost) => {
+  return dispatch => {
+    return axios.put(`${URL}/comments/${id}`, JSON.stringify(body) , config)
+      .then(resp => dispatch(searchComments(idPost)))
+      .then(() => (alert("Comment edited")))
+  }
+}
+
 
 
 

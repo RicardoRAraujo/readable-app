@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { deleteComments, changeScoreComment } from './commentsActions'
 import Modal from 'react-modal'
 import CommentsCreate from './commentsCreate'
+import CommentEdit from './commentEdit'
 
 const customStyles = {
   content : {
@@ -22,19 +23,30 @@ class Comments extends Component {
     super(props);
 
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      modalEditIsOpen: false
     };
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this)
+    this.openEditModal = this.openEditModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
     //Modal.setAppElement('#root');
   }
   
   openModal() {
-    this.setState({modalIsOpen: true});
+    this.setState({modalIsOpen: true})
+  }
+  editComment(comment) {
+    this.setState({ comment: comment })
+    this.openEditModal()
+  }
+
+  openEditModal() {
+    this.setState({modalEditIsOpen: true})
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false});
+    this.setState({modalIsOpen: false})
+    this.setState({modalEditIsOpen: false})
   }
 
   printDate(timestamp) {
@@ -67,8 +79,8 @@ class Comments extends Component {
                           <i className="fa fa-thumbs-up icon-comments" onClick={() => this.props.changeScoreComment(comment.id, idPost, true)}></i></font>
                         <font color="orange">
                           <i className="fa fa-thumbs-down icon-comments" onClick={() => this.props.changeScoreComment(comment.id, idPost, false)}></i></font>
-                        {/* <font color="black">
-                          <i className="fa fa fa-pencil icon-comments" onClick={() => alert('sds')}></i></font> */}
+                        <font color="black">
+                          <i className="fa fa fa-pencil icon-comments" onClick={() => this.editComment(comment)}></i></font>
                         <font color="red">
                           <i className="fa fa-times icon-comments" onClick={() => this.props.deleteComments(comment.id, idPost)}></i></font>
                       </span>
@@ -86,12 +98,20 @@ class Comments extends Component {
         >
         <CommentsCreate closeModal={this.closeModal} id={idPost}/>
         </Modal>
+        <Modal
+          isOpen={this.state.modalEditIsOpen}
+          style={customStyles}
+          contentLabel="Example Modal"
+          ariaHideApp={false}
+        >
+        <CommentEdit closeModal={this.closeModal} comment={this.state.comment}/>
+        </Modal>
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({ category: state.categories.categories})
+const mapStateToProps = null 
 const mapDispatchToProps = (dispatch) => ({ 
   deleteComments: bindActionCreators(deleteComments, dispatch),
   changeScoreComment: bindActionCreators(changeScoreComment, dispatch)

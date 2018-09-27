@@ -52,6 +52,9 @@
 .fa-pencil:hover {
   color: blue !important;
 }
+.fa-times-circle:hover {
+  color: red !important;
+}
 
 .panel-relative{
   position: relative;

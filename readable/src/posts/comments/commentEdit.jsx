@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { createComments  } from './commentsActions'
+import { editComment  } from './commentsActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import serializeForm from 'form-serialize'
 
-class CommentsCreate extends Component {
+class CommentEdit extends Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -25,29 +25,28 @@ class CommentsCreate extends Component {
   handleSubmit(e) {
     e.preventDefault()
     const values = serializeForm(e.target, { hash:true })
-    values['id'] = this.randomString(20)
     values['timestamp'] = new Date().valueOf()
-    values['parentId'] = this.props.id
-    if(this.props.createComments) {
-      this.props.createComments(values, this.props.id)
+    if(this.props.editComment) {
+      this.props.editComment(values, this.props.comment.id, this.props.comment.parentId)
       document.getElementById("form").reset();
     }
   }
 
   render() {
+    console.log(this.props)
     return(
       <div>
         <div className="col-md-11">
-          <h3>New comment</h3> 
+          <h3>Edit comment</h3> 
         </div>
         <div className="col-md-1">
           <i onClick={() => this.props.closeModal()} className="fa fa-times-circle fa-2x element-icon-close-style"></i>
         </div>
         <form onSubmit={this.handleSubmit} id="form" className="form-inline">
           <div className="form-group">
-            <input className="form-control" type="text" name="author" placeholder="Author"/>
-            <input className="form-control" type="textarea" name="body" placeholder="Description"/>
-            <button className="btn btn-success">Add comment</button>
+            <input className="form-control" type="text" name="author" value={this.props.comment.author} placeholder="Author" disabled/>
+            <input className="form-control" type="textarea" name="body" placeholder={this.props.comment.body} />
+            <button className="btn btn-success">Edit comment</button>
           </div>
         </form>
       </div>
@@ -57,6 +56,6 @@ class CommentsCreate extends Component {
 
 const mapStateToProps = null
 const mapDispatchToProps = (dispatch) => ({ 
-  createComments: bindActionCreators(createComments, dispatch)
+  editComment: bindActionCreators(editComment, dispatch)
 })
-export default connect(mapStateToProps, mapDispatchToProps)(CommentsCreate)
+export default connect(mapStateToProps, mapDispatchToProps)(CommentEdit)
