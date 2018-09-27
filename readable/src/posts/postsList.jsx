@@ -65,8 +65,13 @@ class PostsList extends Component {
   render() {
     return(
       <div>
-        {this.renderRows()}
-      </div>
+        {this.props.list !== [] && (
+          this.renderRows()
+        )}
+        {this.props.list.length === 0  && (
+          <h4 className="center">No posts listed</h4>
+        )}      
+      </div>     
     )
   } 
 }

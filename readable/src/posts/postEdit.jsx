@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { editComment  } from './commentsActions'
+import { editPost  } from './postsActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import serializeForm from 'form-serialize'
 
-class CommentEdit extends Component {
+class PostEdit extends Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -14,8 +14,8 @@ class CommentEdit extends Component {
     e.preventDefault()
     const values = serializeForm(e.target, { hash:true })
     values['timestamp'] = new Date().valueOf()
-    if(this.props.editComment) {
-      this.props.editComment(values, this.props.comment.id, this.props.comment.parentId)
+    if(this.props.editPost) {
+      this.props.editPost(values, this.props.post.id)
       document.getElementById("form").reset();
     }
   }
@@ -24,16 +24,16 @@ class CommentEdit extends Component {
     return(
       <div>
         <div className="col-md-11">
-          <h3>Edit comment</h3> 
+          <h3>Edit post</h3> 
         </div>
         <div className="col-md-1">
           <i onClick={() => this.props.closeModal()} className="fa fa-times-circle fa-2x element-icon-close-style"></i>
         </div>
         <form onSubmit={this.handleSubmit} id="form" className="form-inline">
           <div className="form-group">
-            <input className="form-control" type="text" name="author" value={this.props.comment.author} placeholder="Author" disabled/>
-            <input className="form-control" type="textarea" name="body" defaultValue={this.props.comment.body} />
-            <button className="btn btn-success">Edit comment</button>
+            <input className="form-control" type="text" name="author" value={this.props.post.author} placeholder="Author" disabled/>
+            <input className="form-control" type="textarea" name="body" defaultValue={this.props.post.body} />
+            <button className="btn btn-success">Edit post</button>
           </div>
         </form>
       </div>
@@ -43,6 +43,6 @@ class CommentEdit extends Component {
 
 const mapStateToProps = null
 const mapDispatchToProps = (dispatch) => ({ 
-  editComment: bindActionCreators(editComment, dispatch)
+  editPost: bindActionCreators(editPost, dispatch)
 })
-export default connect(mapStateToProps, mapDispatchToProps)(CommentEdit)
+export default connect(mapStateToProps, mapDispatchToProps)(PostEdit)

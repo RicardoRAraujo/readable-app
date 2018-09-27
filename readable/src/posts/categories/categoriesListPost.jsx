@@ -69,7 +69,12 @@ class CategoriesListPost extends Component {
     return(
       <div>
         <PageHeader name={`${this.props.params.category} Posts`} small="List" />
-        {this.renderRows()}
+        {this.props.list !== [] && (
+          this.renderRows()
+        )}
+        {this.props.list.length === 0  && (
+          <h4 className="center">No posts from this category <Link to="/posts">View all posts</Link></h4>
+        )}        
       </div>
     )
   } 

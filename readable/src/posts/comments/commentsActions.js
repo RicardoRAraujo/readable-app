@@ -46,14 +46,3 @@ export const editComment = (body, id, idPost) => {
       .then(() => (alert("Comment edited")))
   }
 }
-
-
-
-
-
-// export const searchPostsCategories = (category) => {
-//   return(dispatch) => {
-//     return axios.get(`${URL}/${category}/posts`,  config )
-//       .then(resp => dispatch({type: 'SEARCHED_CATEGORY_POSTS', payload: resp.data}))
-//   }
-// }

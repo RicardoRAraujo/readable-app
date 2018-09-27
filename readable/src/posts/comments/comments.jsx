@@ -25,7 +25,7 @@ class Comments extends Component {
     this.state = {
       modalIsOpen: false,
       modalEditIsOpen: false
-    };
+    }
     this.openModal = this.openModal.bind(this)
     this.openEditModal = this.openEditModal.bind(this)
     this.closeModal = this.closeModal.bind(this)
@@ -35,6 +35,7 @@ class Comments extends Component {
   openModal() {
     this.setState({modalIsOpen: true})
   }
+  
   editComment(comment) {
     this.setState({ comment: comment })
     this.openEditModal()
@@ -80,7 +81,7 @@ class Comments extends Component {
                         <font color="orange">
                           <i className="fa fa-thumbs-down icon-comments" onClick={() => this.props.changeScoreComment(comment.id, idPost, false)}></i></font>
                         <font color="black">
-                          <i className="fa fa fa-pencil icon-comments" onClick={() => this.editComment(comment)}></i></font>
+                          <i className="fa fa-pencil icon-comments" onClick={() => this.editComment(comment)}></i></font>
                         <font color="red">
                           <i className="fa fa-times icon-comments" onClick={() => this.props.deleteComments(comment.id, idPost)}></i></font>
                       </span>

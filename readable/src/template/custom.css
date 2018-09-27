@@ -58,3 +58,9 @@
   position: absolute;
   right: 20px;
 }
+.center {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
