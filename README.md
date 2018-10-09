@@ -1,3 +1,3 @@
 # readable-app
 
--- start project
+ --start project
